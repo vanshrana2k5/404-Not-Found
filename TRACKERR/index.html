@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Civic Track - Report Issue</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Add Leaflet CSS for mapping -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+</head>
+<body>
+  <div class="mobile-container">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="app-title">CIVIC TRACK</h1>
+      <div class="header-icons">
+        <i class="fas fa-bell notification-icon"></i>
+        <div class="menu-icon">
+          <div class="menu-lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-area">
+        <!-- Map and Filter Section -->
+        <div class="map-filter-box">
+          <div id="map" style="height:280px;width:100%;border-radius:10px;margin-bottom:15px;"></div>
+          <div class="filter-controls">
+            <select id="statusFilter">
+              <option value="">Status: All</option>
+              <option value="REPORTED">Reported</option>
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="RESOLVED">Resolved</option>
+            </select>
+            <select id="categoryFilter">
+              <option value="">Category: All</option>
+              <option value="ROADS">Roads</option>
+              <option value="WATER">Water</option>
+              <option value="ELECTRICITY">Electricity</option>
+              <option value="WASTE">Waste</option>
+              <option value="PUBLIC_SAFETY">Public Safety</option>
+              <option value="OTHER">Other</option>
+            </select>
+            <select id="distanceFilter">
+              <option value="1">Within 1 km</option>
+              <option value="3" selected>Within 3 km</option>
+              <option value="5">Within 5 km</option>
+            </select>
+          </div>
+          <div id="outside-zone-msg" style="display:none;color:#cc3300;background:#fff3cd;padding:7px 10px;border-radius:5px;margin-top:10px;font-weight:600;">You are outside your neighborhood zone. Move closer to view issues.</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Report Form -->
+    <section class="report-section">
+      <h2 class="form-title">Report Civic Issue</h2>
+      <form class="report-form" id="civicForm">
+        <div class="input-group">
+          <input type="text" id="issueTitle" placeholder="Enter issue title" required />
+        </div>
+        <div class="input-group">
+          <textarea id="issueDescription" placeholder="Enter a short description of the issue" rows="4" required></textarea>
+        </div>
+        <div class="input-group">
+          <select id="issueCategory" required>
+            <option value="">Select issue category</option>
+            <option value="ROADS">Roads & Infrastructure</option>
+            <option value="WATER">Water Supply</option>
+            <option value="ELECTRICITY">Electricity</option>
+            <option value="WASTE">Waste Management</option>
+            <option value="PUBLIC_SAFETY">Public Safety</option>
+            <option value="OTHER">Other</option>
+          </select>
+        </div>
+        <div class="photo-upload-section">
+          <div class="upload-boxes">
+            <div class="upload-box" onclick="triggerFileInput(1)">
+              <i class="fas fa-plus"></i>
+              <input type="file" id="photo1" accept="image/*" style="display:none" onchange="handleFileUpload(1)" />
+            </div>
+            <div class="upload-box" onclick="triggerFileInput(2)">
+              <i class="fas fa-plus"></i>
+              <input type="file" id="photo2" accept="image/*" style="display:none" onchange="handleFileUpload(2)" />
+            </div>
+            <div class="upload-box" onclick="triggerFileInput(3)">
+              <i class="fas fa-plus"></i>
+              <input type="file" id="photo3" accept="image/*" style="display:none" onchange="handleFileUpload(3)" />
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn">SUBMIT</button>
+        <div class="anonymous-option">
+          <label class="anonymous-label">
+            <input type="checkbox" id="reportAnonymously" />
+            Report anonymously
+          </label>
+        </div>
+      </form>
+    </section>
+  </div>
+  
+  <!-- Add Leaflet JS for mapping -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
